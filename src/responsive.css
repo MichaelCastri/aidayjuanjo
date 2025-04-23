@@ -1,0 +1,111 @@
+/* Estilos específicos para responsividad */
+
+/* Estilos para dispositivos móviles (por defecto) */
+.section-container {
+  padding: 2rem 1rem;
+}
+
+.hero-content {
+  padding: 0 1rem;
+}
+
+.card-container {
+  padding: 1rem;
+}
+
+/* Estilos para tablets (md) */
+@media (min-width: 768px) {
+  .section-container {
+    padding: 3rem 2rem;
+  }
+  
+  .hero-content {
+    padding: 0 2rem;
+  }
+  
+  .card-container {
+    padding: 1.5rem;
+  }
+}
+
+/* Estilos para escritorio (lg) */
+@media (min-width: 1024px) {
+  .section-container {
+    padding: 4rem 2rem;
+  }
+  
+  .hero-content {
+    padding: 0 3rem;
+  }
+  
+  .card-container {
+    padding: 2rem;
+  }
+}
+
+/* Ajustes específicos para componentes en móvil */
+@media (max-width: 640px) {
+  .timeline-container {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .timeline-item {
+    width: 100%;
+  }
+  
+  .contact-form-container {
+    flex-direction: column;
+  }
+  
+  .contact-info {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #476c0c;
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .contact-form {
+    width: 100%;
+  }
+}
+
+/* Ajustes para orientación horizontal en móviles */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero-section {
+    height: auto;
+    min-height: 100vh;
+    padding: 6rem 0;
+  }
+  
+  .countdown-container {
+    flex-wrap: wrap;
+  }
+  
+  .countdown-item {
+    width: 50%;
+    margin-bottom: 1rem;
+  }
+}
+
+/* Mejoras de accesibilidad para dispositivos táctiles */
+@media (hover: none) {
+  .btn-primary, 
+  .btn-elegant,
+  .nav-link {
+    padding: 0.75rem 1.5rem; /* Botones más grandes para tocar */
+  }
+  
+  .form-input, 
+  .form-select, 
+  .form-textarea {
+    padding: 0.75rem;
+    font-size: 1rem;
+  }
+  
+  .clickable-element {
+    min-height: 44px; /* Altura mínima para elementos táctiles */
+    min-width: 44px;
+  }
+}
