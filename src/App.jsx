@@ -702,7 +702,7 @@ const App = () => {
             <a href="#confirmacion" className="footer-link">Confirmación</a>
           </div>
           
-          <div className="footer-copyright">© 2025 - Con amor para nuestros invitados</div>
+          <div className="footer-copyright">© 2025 - Con amor para nuestr@s invitad@s</div>
           <div className="footer-version">
             {windowWidth < 768 ? 'Versión móvil' : 'Versión escritorio'} - Optimizado para todos los dispositivos
           </div>
