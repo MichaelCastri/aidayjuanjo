@@ -1,5 +1,5 @@
 :root {
-  --color-rosa-pastel: #476c0c;
+  --color-rosa-pastel: #788744;
   --color-rosa-oscuro: #394820;
   --color-verde-claro: #d1e8d0;
   --color-texto-oscuro: #333333;
@@ -71,24 +71,25 @@ body {
 .floral-top-left {
   top: 0;
   left: 0;
-  background-image: url('/assets/images/4.jpg');
+  background-image: url('/flor.png');
   transform: rotate(45deg);
 }
 
 .floral-bottom-right {
   bottom: 0;
   right: 0;
-  background-image: url('/assets/images/4.jpg');
+  background-image: url('/flor.png');
   transform: rotate(225deg);
 }
 
 /* Navbar */
 .navbar {
-  position: fixed;
+  position: flex;
   top: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.95);
+  background-image: url('/flor.png');
+  background-size:cover ;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   padding: 15px 0;

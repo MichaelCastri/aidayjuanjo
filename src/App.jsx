@@ -8,7 +8,7 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  
+
   // Para la cuenta atrás
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -16,7 +16,7 @@ const App = () => {
     minutes: 0,
     seconds: 0
   });
-  
+
   // Para el formulario de contacto
   const [formData, setFormData] = useState({
     nombre: '',
@@ -25,11 +25,12 @@ const App = () => {
     asistencia: '',
     transporte: '',
     alergias: '',
-    mensaje: ''
+    mensaje: '',
+    usoBus: '',
   });
-  
+
   const [formSubmitted, setFormSubmitted] = useState(false);
-  
+
   // Para la galería de fotos
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
@@ -41,22 +42,22 @@ const App = () => {
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 2000);
-    
+
     // Función para manejar el cambio de tamaño de la ventana
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
     };
-    
+
     // Agregar event listener para el cambio de tamaño
     window.addEventListener('resize', handleResize);
-    
+
     // Calcular cuenta atrás
     const weddingDate = new Date('July 5, 2025 18:00:00').getTime();
-    
+
     const countdownTimer = setInterval(() => {
       const now = new Date().getTime();
       const difference = weddingDate - now;
-      
+
       if (difference > 0) {
         setTimeLeft({
           days: Math.floor(difference / (1000 * 60 * 60 * 24)),
@@ -66,7 +67,7 @@ const App = () => {
         });
       }
     }, 1000);
-    
+
     return () => {
       clearTimeout(timer);
       clearInterval(countdownTimer);
@@ -77,7 +78,7 @@ const App = () => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-  
+
   const handleFormChange = (e) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
@@ -85,27 +86,35 @@ const App = () => {
       [name]: value
     }));
   };
-  
-  const handleFormSubmit = (e) => {
+
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    // Simulación de envío de formulario
     setIsUploading(true);
-    setTimeout(() => {
-      setFormSubmitted(true);
-      setIsUploading(false);
-      // Resetear formulario
-      setFormData({
-        nombre: '',
-        email: '',
-        telefono: '',
-        asistencia: '',
-        transporte: '',
-        alergias: '',
-        mensaje: ''
+  
+    try {
+      const response = await fetch('https://script.google.com/macros/s/AKfycbzDMkZRoGbA7J45WCTI4D_uvOQ-OpldWk5KuLYQbPNi1NYcJkbgu4fsIp8qZcxhAZv5Rw/exec', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData),
       });
-    }, 1500);
+  
+      const result = await response.json();
+      if (result.success) {
+        setFormSubmitted(true);
+      } else {
+        console.error('Error en respuesta del servidor:', result);
+      }
+    } catch (error) {
+      console.error('Error al enviar formulario:', error);
+    } finally {
+      setIsUploading(false);
+    }
   };
   
+  
+
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -118,7 +127,7 @@ const App = () => {
       setUploadSuccess(false);
     }
   };
-  
+
   const handleFileUpload = (e) => {
     e.preventDefault();
     if (selectedFile) {
@@ -161,16 +170,16 @@ const App = () => {
 
   return (
     <div>
-      
+
       {/* Navbar */}
       <nav className="navbar">
         <div className="container navbar-container">
           <a href="#inicio" className="navbar-logo">Aida & Juanjo</a>
-          
+
           <button className="navbar-toggle" onClick={toggleMenu}>
             <span>☰</span>
           </button>
-          
+
           <div className="navbar-menu">
             <a href="#inicio">Inicio</a>
             <a href="#confirmacion">Confirmación de Asistencia</a>
@@ -178,7 +187,7 @@ const App = () => {
             <a href="#transporte">Transporte</a>
           </div>
         </div>
-        
+
         {isMenuOpen && (
           <div className="mobile-menu active">
             <a href="#inicio" onClick={toggleMenu}>Inicio</a>
@@ -188,7 +197,7 @@ const App = () => {
           </div>
         )}
       </nav>
-      
+
       {/* Elementos decorativos florales */}
       {windowWidth >= 768 && (
         <>
@@ -196,14 +205,14 @@ const App = () => {
           <div className="floral-element floral-bottom-right"></div>
         </>
       )}
-      
+
       {/* Hero Section */}
-     
 
-      
-<div><HeroBonito/></div>
 
-      
+
+      <div><HeroBonito /></div>
+
+
       {/* Bienvenida Section */}
       <section className="section bienvenida">
         <div className="container">
@@ -218,12 +227,12 @@ const App = () => {
           </div>
         </div>
       </section>
-      
+
       {/* Lugar Evento Section */}
       <section id="evento" className="section">
         <div className="container">
           <h2 className="section-title">Lugar del Evento</h2>
-          
+
           <div className="lugar-evento-cards">
             {/* Ceremonia */}
             <div className="lugar-card">
@@ -234,14 +243,14 @@ const App = () => {
               </div>
               <h3 className="lugar-title">Ceremonia</h3>
               <p>
-                Te esperamos en la Parroquia de San Cristóbal y San Rafael a las 18h (Madrid).
+                Te esperamos en la Parroquia de San Cristóbal y San Rafael a las 18:15h (Madrid).
               </p>
               <p className="lugar-address">
                 Dirección: Calle Bravo Murillo 39
               </p>
-              <a 
-                href="https://maps.google.com/?q=Parroquia+de+San+Cristóbal+y+San+Rafael+Madrid" 
-                target="_blank" 
+              <a
+                href="https://maps.google.com/?q=Parroquia+de+San+Cristóbal+y+San+Rafael+Madrid"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="lugar-map-link"
               >
@@ -251,7 +260,7 @@ const App = () => {
                 </svg>
               </a>
             </div>
-            
+
             {/* Celebración */}
             <div className="lugar-card">
               <div className="lugar-icon">
@@ -266,9 +275,9 @@ const App = () => {
               <p className="lugar-address">
                 Dirección: C. Cabeza de Manzaneda 105 (Moncloa-Aravaca)
               </p>
-              <a 
-                href="https://maps.google.com/?q=Casa+de+Mónico+Aravaca+Madrid" 
-                target="_blank" 
+              <a
+                href="https://maps.google.com/?q=Casa+de+Mónico+Aravaca+Madrid"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="lugar-map-link"
               >
@@ -281,15 +290,15 @@ const App = () => {
           </div>
         </div>
       </section>
-      
+
       {/* Itinerario Section */}
       <section className="section">
         <div className="container">
           <h2 className="section-title">Itinerario del Evento</h2>
-          
+
           <div className="itinerario-timeline">
             <div className="itinerario-line"></div>
-            
+
             <div className="itinerario-items">
               {/* Ceremonia */}
               <div className="itinerario-item">
@@ -301,7 +310,7 @@ const App = () => {
                 <h3 className="itinerario-title">Ceremonia</h3>
                 <p className="itinerario-time">18:30h</p>
               </div>
-              
+
               {/* Cóctel */}
               <div className="itinerario-item">
                 <div className="itinerario-icon">
@@ -312,7 +321,7 @@ const App = () => {
                 <h3 className="itinerario-title">Cóctel</h3>
                 <p className="itinerario-time">20:30h</p>
               </div>
-              
+
               {/* Banquete */}
               <div className="itinerario-item">
                 <div className="itinerario-icon">
@@ -323,7 +332,7 @@ const App = () => {
                 <h3 className="itinerario-title">Banquete</h3>
                 <p className="itinerario-time">22:00h</p>
               </div>
-              
+
               {/* Fiesta */}
               <div className="itinerario-item">
                 <div className="itinerario-icon">
@@ -336,18 +345,18 @@ const App = () => {
               </div>
             </div>
           </div>
-          
+
           <p style={{ textAlign: 'center', marginTop: '40px', fontStyle: 'italic' }}>
             Los horarios son orientativos y pueden sufrir ligeras variaciones.
           </p>
         </div>
       </section>
-      
+
       {/* Transporte Section */}
       <section id="transporte" className="section transporte">
         <div className="container">
           <h2 className="section-title">Transporte y Autobuses</h2>
-          
+
           <div className="transporte-container">
             <div className="transporte-buses">
               {/* Bus 1 */}
@@ -364,7 +373,7 @@ const App = () => {
                   Desde la Iglesia a la Finca (y regreso tras la fiesta).
                 </p>
               </div>
-              
+
               {/* Bus 2 */}
               <div className="transporte-bus">
                 <div className="transporte-bus-title">
@@ -380,14 +389,14 @@ const App = () => {
                 </p>
               </div>
             </div>
-            
+
             {/* Horarios */}
             <div className="transporte-horarios">
               <h3 className="transporte-horarios-title">Horarios</h3>
               <div className="transporte-horarios-grid">
                 <div className="transporte-horario">
                   <p className="transporte-horario-label">Ida desde El Álamo</p>
-                  <p className="transporte-horario-time">17:30h</p>
+                  <p className="transporte-horario-time">17:15h</p>
                 </div>
                 <div className="transporte-horario">
                   <p className="transporte-horario-label">Vuelta</p>
@@ -401,19 +410,25 @@ const App = () => {
           </div>
         </div>
       </section>
-      
-      
-      
+
+
+
       {/* Galería Fotos Section */}
-      <section className="section galeria">
+      <section className="section galeria"
+      style={{
+    backgroundImage: 'url("/fondo trasp.png")',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+  }}>
         <div className="container">
-          <h2 className="section-title">Galería de Fotos</h2>
-          
+          <h2 className="section-title" style={{ textShadow: '0 2 5px white' }}>Galería de Fotos</h2>
+
           <div className="galeria-container">
-            <p style={{ textAlign: 'center', marginBottom: '30px' }}>
+            <p style={{ textAlign: 'center', marginBottom: '30px' , textShadow: '0 0 5px white' }}>
               Nos encantaría que compartieras tus fotos de nuestra boda. Sube tus mejores momentos para crear un álbum de recuerdos inolvidables.
             </p>
-            
+
             <form onSubmit={handleFileUpload} className="galeria-upload">
               <label htmlFor="photo-upload" className="galeria-dropzone">
                 {previewUrl ? (
@@ -432,17 +447,17 @@ const App = () => {
                   </>
                 )}
               </label>
-              <input 
-                id="photo-upload" 
-                type="file" 
-                accept="image/*" 
-                onChange={handleFileChange} 
-                style={{ display: 'none' }} 
+              <input
+                id="photo-upload"
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                style={{ display: 'none' }}
               />
-              
+
               {selectedFile && (
-                <button 
-                  type="submit" 
+                <button
+                  type="submit"
                   className="btn"
                   disabled={isUploading}
                   style={{ marginTop: '20px' }}
@@ -451,13 +466,13 @@ const App = () => {
                 </button>
               )}
             </form>
-            
+
             {uploadSuccess && (
               <div style={{ textAlign: 'center', color: 'green', fontWeight: '500', marginTop: '20px' }}>
                 ¡Foto subida correctamente! Gracias por compartir tus recuerdos.
               </div>
             )}
-            
+
             <div style={{ marginTop: '40px', paddingTop: '20px', borderTop: '1px solid rgba(248, 200, 220, 0.5)' }}>
               <h3 style={{ textAlign: 'center', marginBottom: '20px', fontFamily: 'var(--fuente-titulo)' }}>Fotos compartidas</h3>
               <div className="galeria-grid">
@@ -469,86 +484,56 @@ const App = () => {
           </div>
         </div>
       </section>
-      
+
       {/* Cuenta Atrás Section */}
       <section className="section">
         <div className="container">
           <h2 className="section-title">Cuenta Atrás</h2>
-          
+
           <div className="cuenta-atras-container">
             <p style={{ marginBottom: '30px', fontSize: '1.2rem' }}>
               Faltan
             </p>
-            
+
             <div className="cuenta-atras-grid">
               <div className="cuenta-atras-item">
                 <div className="cuenta-atras-number">{timeLeft.days}</div>
                 <div className="cuenta-atras-label">Días</div>
               </div>
-              
+
               <div className="cuenta-atras-item">
                 <div className="cuenta-atras-number">{timeLeft.hours}</div>
                 <div className="cuenta-atras-label">Horas</div>
               </div>
-              
+
               <div className="cuenta-atras-item">
                 <div className="cuenta-atras-number">{timeLeft.minutes}</div>
                 <div className="cuenta-atras-label">Minutos</div>
               </div>
-              
+
               <div className="cuenta-atras-item">
                 <div className="cuenta-atras-number">{timeLeft.seconds}</div>
                 <div className="cuenta-atras-label">Segundos</div>
               </div>
             </div>
-            
+
             <p className="cuenta-atras-date">
               5 de julio de 2025
             </p>
           </div>
         </div>
       </section>
-      
+
       {/* Contacto Section */}
       <section id="confirmacion" className="section contacto">
         <div className="container">
           <h2 className="section-title">Contacto y Confirmación</h2>
-          
+
           <div className="contacto-container">
             <div className="contacto-flex">
               {/* Información de contacto */}
-              <div className="contacto-info">
-                <h3 className="contacto-info-title">Contacto de los novios</h3>
-                
-                <div className="contacto-person">
-                  <p className="contacto-person-name">Aida Fernández Caballero</p>
-                  <p className="contacto-person-phone">
-                    <span className="contacto-icon">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </span>
-                    651594345
-                  </p>
-                </div>
-                
-                <div className="contacto-person">
-                  <p className="contacto-person-name">Juan José Ribagorda Sánchez</p>
-                  <p className="contacto-person-phone">
-                    <span className="contacto-icon">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </span>
-                    691610768
-                  </p>
-                </div>
-                
-                <p className="contacto-note">
-                  Por favor, confirma tu asistencia antes del 5 de junio de 2025 para poder organizarlo todo correctamente.
-                </p>
-              </div>
               
+
               {/* Formulario de confirmación */}
               <div className="contacto-form">
                 {formSubmitted ? (
@@ -573,7 +558,7 @@ const App = () => {
                         className="form-input"
                       />
                     </div>
-                    
+
                     <div className="form-grid">
                       <div className="form-group">
                         <label htmlFor="email" className="form-label">
@@ -588,7 +573,7 @@ const App = () => {
                           className="form-input"
                         />
                       </div>
-                      
+
                       <div className="form-group">
                         <label htmlFor="telefono" className="form-label">
                           Teléfono *
@@ -604,7 +589,7 @@ const App = () => {
                         />
                       </div>
                     </div>
-                    
+
                     <div className="form-group">
                       <label htmlFor="asistencia" className="form-label">
                         ¿Asistirás a nuestra boda? *
@@ -622,11 +607,11 @@ const App = () => {
                         <option value="no">No podré asistir</option>
                       </select>
                     </div>
-                    
+
                     {formData.asistencia === 'si' && (
                       <div className="form-group">
                         <label htmlFor="transporte" className="form-label">
-                          ¿Necesitas transporte?
+                        ¿Harás uso del servicio de autobús?
                         </label>
                         <select
                           id="transporte"
@@ -636,13 +621,14 @@ const App = () => {
                           className="form-select"
                         >
                           <option value="">Selecciona una opción</option>
-                          <option value="bus1">Sí, Bus 1 (Iglesia - Finca)</option>
-                          <option value="bus2">Sí, Bus 2 (El Álamo - Iglesia - Finca)</option>
+                          <option value="bus1">Bus 1 (Iglesia - Finca)</option>
+                          <option value="bus2">Bus 2 (El Álamo - Iglesia - Finca)</option>
+                          <option value="bus3">Los dos  (Iglesia - Finca)(El Álamo - Iglesia - Finca)</option>
                           <option value="no">No, iré por mi cuenta</option>
                         </select>
                       </div>
                     )}
-                    
+
                     <div className="form-group">
                       <label htmlFor="alergias" className="form-label">
                         Alergias o intolerancias alimentarias
@@ -671,7 +657,7 @@ const App = () => {
                         placeholder="¿Quieres decirnos algo?"
                       ></textarea>
                     </div>
-                    
+
                     <div className="form-submit">
                       <button
                         type="submit"
@@ -681,27 +667,62 @@ const App = () => {
                         {isUploading ? 'Enviando...' : 'Confirmar asistencia'}
                       </button>
                     </div>
+                    
+
                   </form>
                 )}
               </div>
             </div>
           </div>
         </div>
+        {/* Contacto aida y juanjo */}
+        <div className="contacto-info">
+                <h3 className="contacto-info-title">Contacto de los novios</h3>
+
+                <div className="contacto-person">
+                  <p className="contacto-person-name">Aida Fernández Caballero</p>
+                  <p className="contacto-person-phone">
+                    <span className="contacto-icon">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </span>
+                    651594345
+                  </p>
+                </div>
+
+                <div className="contacto-person">
+                  <p className="contacto-person-name">Juan José Ribagorda Sánchez</p>
+                  <p className="contacto-person-phone">
+                    <span className="contacto-icon">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </span>
+                    691610768
+                  </p>
+                </div>
+
+                <p className="contacto-note">
+                  Por favor, confirma tu asistencia antes del 5 de junio de 2025 para poder organizarlo todo correctamente.
+                </p>
+              </div>
       </section>
-      
+
+
       {/* Footer */}
       <footer className="footer">
         <div className="container">
           <div className="footer-logo">Aida & Juanjo</div>
           <div className="footer-date">5 de julio de 2025</div>
-          
+
           <div className="footer-links">
             <a href="#inicio" className="footer-link">Inicio</a>
             <a href="#evento" className="footer-link">Evento</a>
             <a href="#transporte" className="footer-link">Transporte</a>
             <a href="#confirmacion" className="footer-link">Confirmación</a>
           </div>
-          
+
           <div className="footer-copyright">© 2025 - Con amor para nuestr@s invitad@s</div>
           <div className="footer-version">
             {windowWidth < 768 ? 'Versión móvil' : 'Versión escritorio'} - Optimizado para todos los dispositivos
