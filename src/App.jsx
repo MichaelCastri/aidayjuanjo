@@ -92,7 +92,7 @@ const App = () => {
     setIsUploading(true);
   
     try {
-      const response = await fetch('https://script.google.com/macros/s/AKfycbzDMkZRoGbA7J45WCTI4D_uvOQ-OpldWk5KuLYQbPNi1NYcJkbgu4fsIp8qZcxhAZv5Rw/exec', {
+      const response = await fetch('https://script.google.com/macros/s/AKfycbyU4rgYNPNyTw5CqYSVahDRxeBDQgZq-0eE9OZ8MAAmlZBRIyBQeSvTU5MGlQdBglqD/exec', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -100,14 +100,23 @@ const App = () => {
         body: JSON.stringify(formData),
       });
   
-      const result = await response.json();
-      if (result.success) {
+      if (response.ok) {
         setFormSubmitted(true);
+        setFormData({
+          nombre: '',
+          email: '',
+          telefono: '',
+          asistencia: '',
+          transporte: '',
+          alergias: '',
+          usoBus: '',
+          mensaje: ''
+        });
       } else {
-        console.error('Error en respuesta del servidor:', result);
+        console.error("Error al enviar: respuesta no válida.");
       }
     } catch (error) {
-      console.error('Error al enviar formulario:', error);
+      console.error("Error al enviar formulario:", error);
     } finally {
       setIsUploading(false);
     }
@@ -303,9 +312,7 @@ const App = () => {
               {/* Ceremonia */}
               <div className="itinerario-item">
                 <div className="itinerario-icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
+                <img src="/11.png" alt="Icono de confirmación" width="24" height="24" />
                 </div>
                 <h3 className="itinerario-title">Ceremonia</h3>
                 <p className="itinerario-time">18:30h</p>
@@ -314,9 +321,7 @@ const App = () => {
               {/* Cóctel */}
               <div className="itinerario-item">
                 <div className="itinerario-icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
+                <img src="/22.png" alt="Icono de confirmación" width="24" height="24" />
                 </div>
                 <h3 className="itinerario-title">Cóctel</h3>
                 <p className="itinerario-time">20:30h</p>
@@ -325,9 +330,7 @@ const App = () => {
               {/* Banquete */}
               <div className="itinerario-item">
                 <div className="itinerario-icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
+                <img src="/33.png" alt="Icono de confirmación" width="24" height="24" />
                 </div>
                 <h3 className="itinerario-title">Banquete</h3>
                 <p className="itinerario-time">22:00h</p>
@@ -336,9 +339,7 @@ const App = () => {
               {/* Fiesta */}
               <div className="itinerario-item">
                 <div className="itinerario-icon">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
+                <img src="/44.png" alt="Icono de confirmación" width="24" height="24" />
                 </div>
                 <h3 className="itinerario-title">Fiesta y Barra Libre</h3>
                 <p className="itinerario-time">00:00h</p>
@@ -623,7 +624,7 @@ const App = () => {
                           <option value="">Selecciona una opción</option>
                           <option value="bus1">Bus 1 (Iglesia - Finca)</option>
                           <option value="bus2">Bus 2 (El Álamo - Iglesia - Finca)</option>
-                          <option value="bus3">Los dos  (Iglesia - Finca)(El Álamo - Iglesia - Finca)</option>
+                          
                           <option value="no">No, iré por mi cuenta</option>
                         </select>
                       </div>
@@ -670,8 +671,18 @@ const App = () => {
                     
 
                   </form>
+                  
+                  
                 )}
-              </div>
+              </div>{formSubmitted && (
+  <div className="popup-confirmacion">
+    <div className="popup-contenido">
+      <h2>🎉 ¡Confirmación enviada!</h2>
+      <p>Gracias por confirmar tu asistencia. ¡Nos vemos en la boda!</p>
+      <button onClick={() => setFormSubmitted(false)}>Cerrar</button>
+    </div>
+  </div>
+)}
             </div>
           </div>
         </div>
