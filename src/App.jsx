@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './css/styles.css';
 
 import HeroBonito from './components/HeroFondo';
-import NavbarMosaico from './components/NavbarMosaico';
+
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -228,7 +228,7 @@ const App = () => {
           <h2 className="section-title">Os damos la bienvenida</h2>
           <div className="bienvenida-content">
             <p>
-              Queridos familiares y amigos, estamos emocionados de invitaros a compartir con nosotros uno de los días más especiales de nuestras vidas. Después de tantos años juntos, hemos decidido dar el siguiente paso y nos encantaría que nos acompañarais en esta celebración de amor.
+              Queridos familiares y amigos, estamos emocionados de invitaros a compartir con nosotros uno de los días más especiales de nuestras vidas. Después de tantos años juntos, hemos decidido dar el siguiente paso y nos encantaría que nos acompañarais en esta celebración.
             </p>
             <p>
               En esta página encontraréis toda la información necesaria sobre nuestra boda. Os pedimos que confirméis vuestra asistencia lo antes posible para poder organizarlo todo perfectamente.
