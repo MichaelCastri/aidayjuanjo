@@ -90,7 +90,7 @@ const App = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setIsUploading(true);
-  
+
     try {
       const response = await fetch('https://script.google.com/macros/s/AKfycbyU4rgYNPNyTw5CqYSVahDRxeBDQgZq-0eE9OZ8MAAmlZBRIyBQeSvTU5MGlQdBglqD/exec', {
         method: 'POST',
@@ -99,7 +99,7 @@ const App = () => {
         },
         body: JSON.stringify(formData),
       });
-  
+
       if (response.ok) {
         setFormSubmitted(true);
         setFormData({
@@ -121,8 +121,8 @@ const App = () => {
       setIsUploading(false);
     }
   };
-  
-  
+
+
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -246,9 +246,9 @@ const App = () => {
             {/* Ceremonia */}
             <div className="lugar-card">
               <div className="lugar-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+              
+                  <img src="/11.png" alt="Icono de confirmación" width="24" height="24" />
+                
               </div>
               <h3 className="lugar-title">Ceremonia</h3>
               <p>
@@ -273,9 +273,7 @@ const App = () => {
             {/* Celebración */}
             <div className="lugar-card">
               <div className="lugar-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+              <img src="/44.png" alt="Icono de confirmación" width="24" height="24" />
               </div>
               <h3 className="lugar-title">Celebración</h3>
               <p>
@@ -312,7 +310,7 @@ const App = () => {
               {/* Ceremonia */}
               <div className="itinerario-item">
                 <div className="itinerario-icon">
-                <img src="/11.png" alt="Icono de confirmación" width="24" height="24" />
+                  <img src="/11.png" alt="Icono de confirmación" width="24" height="24" />
                 </div>
                 <h3 className="itinerario-title">Ceremonia</h3>
                 <p className="itinerario-time">18:30h</p>
@@ -321,7 +319,7 @@ const App = () => {
               {/* Cóctel */}
               <div className="itinerario-item">
                 <div className="itinerario-icon">
-                <img src="/22.png" alt="Icono de confirmación" width="24" height="24" />
+                  <img src="/22.png" alt="Icono de confirmación" width="24" height="24" />
                 </div>
                 <h3 className="itinerario-title">Cóctel</h3>
                 <p className="itinerario-time">20:30h</p>
@@ -330,7 +328,7 @@ const App = () => {
               {/* Banquete */}
               <div className="itinerario-item">
                 <div className="itinerario-icon">
-                <img src="/33.png" alt="Icono de confirmación" width="24" height="24" />
+                  <img src="/33.png" alt="Icono de confirmación" width="24" height="24" />
                 </div>
                 <h3 className="itinerario-title">Banquete</h3>
                 <p className="itinerario-time">22:00h</p>
@@ -339,7 +337,7 @@ const App = () => {
               {/* Fiesta */}
               <div className="itinerario-item">
                 <div className="itinerario-icon">
-                <img src="/44.png" alt="Icono de confirmación" width="24" height="24" />
+                  <img src="/44.png" alt="Icono de confirmación" width="24" height="24" />
                 </div>
                 <h3 className="itinerario-title">Fiesta y Barra Libre</h3>
                 <p className="itinerario-time">00:00h</p>
@@ -416,17 +414,17 @@ const App = () => {
 
       {/* Galería Fotos Section */}
       <section className="section galeria"
-      style={{
-    backgroundImage: 'url("/fondo trasp.png")',
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
-  }}>
+        style={{
+          backgroundImage: 'url("/fondo trasp.png")',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+        }}>
         <div className="container">
           <h2 className="section-title" style={{ textShadow: '0 2 5px white' }}>Galería de Fotos</h2>
 
           <div className="galeria-container">
-            <p style={{ textAlign: 'center', marginBottom: '30px' , textShadow: '0 0 5px white' }}>
+            <p style={{ textAlign: 'center', marginBottom: '30px', textShadow: '0 0 5px white' }}>
               Nos encantaría que compartieras tus fotos de nuestra boda. Sube tus mejores momentos para crear un álbum de recuerdos inolvidables.
             </p>
 
@@ -533,161 +531,169 @@ const App = () => {
           <div className="contacto-container">
             <div className="contacto-flex">
               {/* Información de contacto */}
-              
-
-              {/* Formulario de confirmación */}
               <div className="contacto-form">
-                {formSubmitted ? (
-                  <div className="success-message">
-                    <div className="success-icon">✓</div>
-                    <h3 className="success-title">¡Gracias por confirmar!</h3>
-                    <p>Hemos recibido tu confirmación. Nos vemos en nuestra boda.</p>
-                  </div>
-                ) : (
-                  <form onSubmit={handleFormSubmit}>
-                    <div className="form-group">
-                      <label htmlFor="nombre" className="form-label">
-                        Nombre completo *
-                      </label>
-                      <input
-                        type="text"
-                        id="nombre"
-                        name="nombre"
-                        value={formData.nombre}
-                        onChange={handleFormChange}
-                        required
-                        className="form-input"
-                      />
-                    </div>
-
-                    <div className="form-grid">
-                      <div className="form-group">
-                        <label htmlFor="email" className="form-label">
-                          Email
-                        </label>
-                        <input
-                          type="email"
-                          id="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleFormChange}
-                          className="form-input"
-                        />
-                      </div>
-
-                      <div className="form-group">
-                        <label htmlFor="telefono" className="form-label">
-                          Teléfono *
-                        </label>
-                        <input
-                          type="tel"
-                          id="telefono"
-                          name="telefono"
-                          value={formData.telefono}
-                          onChange={handleFormChange}
-                          required
-                          className="form-input"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="form-group">
-                      <label htmlFor="asistencia" className="form-label">
-                        ¿Asistirás a nuestra boda? *
-                      </label>
-                      <select
-                        id="asistencia"
-                        name="asistencia"
-                        value={formData.asistencia}
-                        onChange={handleFormChange}
-                        required
-                        className="form-select"
-                      >
-                        <option value="">Selecciona una opción</option>
-                        <option value="si">Sí, asistiré</option>
-                        <option value="no">No podré asistir</option>
-                      </select>
-                    </div>
-
-                    {formData.asistencia === 'si' && (
-                      <div className="form-group">
-                        <label htmlFor="transporte" className="form-label">
-                        ¿Harás uso del servicio de autobús?
-                        </label>
-                        <select
-                          id="transporte"
-                          name="transporte"
-                          value={formData.transporte}
-                          onChange={handleFormChange}
-                          className="form-select"
-                        >
-                          <option value="">Selecciona una opción</option>
-                          <option value="bus1">Bus 1 (Iglesia - Finca)</option>
-                          <option value="bus2">Bus 2 (El Álamo - Iglesia - Finca)</option>
-                          
-                          <option value="no">No, iré por mi cuenta</option>
-                        </select>
-                      </div>
-                    )}
-
-                    <div className="form-group">
-                      <label htmlFor="alergias" className="form-label">
-                        Alergias o intolerancias alimentarias
-                      </label>
-                      <input
-                        type="text"
-                        id="alergias"
-                        name="alergias"
-                        value={formData.alergias}
-                        onChange={handleFormChange}
-                        className="form-input"
-                        placeholder="Especifica si tienes alguna alergia o intolerancia"
-                      />
-                    </div>
-                    
-                    <div className="form-group">
-                      <label htmlFor="mensaje" className="form-label">
-                        Mensaje para los novios
-                      </label>
-                      <textarea
-                        id="mensaje"
-                        name="mensaje"
-                        value={formData.mensaje}
-                        onChange={handleFormChange}
-                        className="form-textarea"
-                        placeholder="¿Quieres decirnos algo?"
-                      ></textarea>
-                    </div>
-
-                    <div className="form-submit">
-                      <button
-                        type="submit"
-                        className="btn"
-                        disabled={isUploading}
-                      >
-                        {isUploading ? 'Enviando...' : 'Confirmar asistencia'}
-                      </button>
-                    </div>
-                    
-
-                  </form>
-                  
-                  
-                )}
-              </div>{formSubmitted && (
-  <div className="popup-confirmacion">
-    <div className="popup-contenido">
-      <h2>🎉 ¡Confirmación enviada!</h2>
-      <p>Gracias por confirmar tu asistencia. ¡Nos vemos en la boda!</p>
-      <button onClick={() => setFormSubmitted(false)}>Cerrar</button>
+  {formSubmitted ? (
+    <div className="success-message">
+      <div className="success-icon">✓</div>
+      <h3 className="success-title">¡Gracias por confirmar!</h3>
+      <p>Hemos recibido tu confirmación. Nos vemos en nuestra boda.</p>
     </div>
-  </div>
-)}
-            </div>
-          </div>
+  ) : (
+    <form
+      onSubmit={async (e) => {
+        e.preventDefault();
+        setIsUploading(true);
+        try {
+          const response = await fetch("/api/confirmacion", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData),
+          });
+
+          if (response.ok) {
+            setFormSubmitted(true);
+            setFormData({
+              nombre: '',
+              email: '',
+              telefono: '',
+              asistencia: '',
+              transporte: '',
+              alergias: '',
+              usoBus: '',
+              mensaje: ''
+            });
+          } else {
+            console.error("Error al enviar: respuesta no válida");
+          }
+        } catch (error) {
+          console.error("Error al enviar formulario:", error);
+        } finally {
+          setIsUploading(false);
+        }
+      }}
+    >
+      <div className="form-group">
+        <label htmlFor="nombre" className="form-label">Nombre completo *</label>
+        <input
+          type="text"
+          id="nombre"
+          name="nombre"
+          value={formData.nombre}
+          onChange={handleFormChange}
+          required
+          className="form-input"
+        />
+      </div>
+
+      <div className="form-grid">
+        <div className="form-group">
+          <label htmlFor="email" className="form-label">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleFormChange}
+            className="form-input"
+          />
         </div>
-        {/* Contacto aida y juanjo */}
-        <div className="contacto-info">
+
+        <div className="form-group">
+          <label htmlFor="telefono" className="form-label">Teléfono *</label>
+          <input
+            type="tel"
+            id="telefono"
+            name="telefono"
+            value={formData.telefono}
+            onChange={handleFormChange}
+            required
+            className="form-input"
+          />
+        </div>
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="asistencia" className="form-label">¿Asistirás a nuestra boda? *</label>
+        <select
+          id="asistencia"
+          name="asistencia"
+          value={formData.asistencia}
+          onChange={handleFormChange}
+          required
+          className="form-select"
+        >
+          <option value="">Selecciona una opción</option>
+          <option value="si">Sí, asistiré</option>
+          <option value="no">No podré asistir</option>
+        </select>
+      </div>
+
+      {formData.asistencia === 'si' && (
+        <div className="form-group">
+          <label htmlFor="transporte" className="form-label">¿Harás uso del servicio de autobús?</label>
+          <select
+            id="transporte"
+            name="transporte"
+            value={formData.transporte}
+            onChange={handleFormChange}
+            className="form-select"
+          >
+            <option value="">Selecciona una opción</option>
+            <option value="bus1">Bus 1 (Iglesia - Finca)</option>
+            <option value="bus2">Bus 2 (El Álamo - Iglesia - Finca)</option>
+            <option value="no">No, iré por mi cuenta</option>
+          </select>
+        </div>
+      )}
+
+      <div className="form-group">
+        <label htmlFor="alergias" className="form-label">Alergias o intolerancias alimentarias</label>
+        <input
+          type="text"
+          id="alergias"
+          name="alergias"
+          value={formData.alergias}
+          onChange={handleFormChange}
+          className="form-input"
+          placeholder="Especifica si tienes alguna alergia o intolerancia"
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="mensaje" className="form-label">Mensaje para los novios</label>
+        <textarea
+          id="mensaje"
+          name="mensaje"
+          value={formData.mensaje}
+          onChange={handleFormChange}
+          className="form-textarea"
+          placeholder="¿Quieres decirnos algo?"
+        ></textarea>
+      </div>
+
+      <div className="form-submit">
+        <button type="submit" className="btn" disabled={isUploading}>
+          {isUploading ? 'Enviando...' : 'Confirmar asistencia'}
+        </button>
+      </div>
+    </form>
+  )}
+
+  {/* Popup de confirmación */}
+  {formSubmitted && (
+    <div className="popup-confirmacion">
+      <div className="popup-contenido">
+        <h2>🎉 ¡Confirmación enviada!</h2>
+        <p>Gracias por confirmar tu asistencia. ¡Nos vemos en la boda!</p>
+        <button onClick={() => setFormSubmitted(false)}>Cerrar</button>
+      </div>
+    </div>
+  )}
+</div>
+
+
+              {/* Contacto aida y juanjo */}
+              <div className="contacto-info">
                 <h3 className="contacto-info-title">Contacto de los novios</h3>
 
                 <div className="contacto-person">
@@ -718,6 +724,9 @@ const App = () => {
                   Por favor, confirma tu asistencia antes del 5 de junio de 2025 para poder organizarlo todo correctamente.
                 </p>
               </div>
+            </div>
+          </div>
+          </div>
       </section>
 
 
@@ -741,6 +750,7 @@ const App = () => {
         </div>
       </footer>
     </div>
+    
   );
 };
 
