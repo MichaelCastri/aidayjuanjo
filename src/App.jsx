@@ -137,17 +137,33 @@ const App = () => {
     }
   };
 
-  const handleFileUpload = (e) => {
+  const handleFileUpload = async (e) => {
     e.preventDefault();
     if (selectedFile) {
       setIsUploading(true);
-      // Simulación de carga
-      setTimeout(() => {
+
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+
+      try {
+        // Aquí va tu webhook de Make
+        const response = await fetch('https://hook.eu2.make.com/qiql5pb8q5oojer2dr1k2hzak135x9cz', {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (response.ok) {
+          setUploadSuccess(true);
+          setSelectedFile(null);
+          setPreviewUrl(null);
+        } else {
+          alert('Error al subir la foto');
+        }
+      } catch (error) {
+        alert('Error al subir la foto');
+      } finally {
         setIsUploading(false);
-        setUploadSuccess(true);
-        setSelectedFile(null);
-        setPreviewUrl(null);
-      }, 1500);
+      }
     }
   };
 
